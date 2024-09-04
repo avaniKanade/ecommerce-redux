@@ -1,0 +1,30 @@
+Table td img {
+    width: auto;
+    height: 6rem;
+}
+tbody, td, tfoot, th, thead, tr {
+    vertical-align: middle;
+}
+.cartSum h5 {
+    border-bottom: 1px solid #f4ecec;
+}
+.text-ellip3 {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+.text-ellip2 {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.disabled-link {
+  pointer-events: none;
+}
