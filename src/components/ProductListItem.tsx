@@ -1,28 +1,36 @@
-import React from 'react'
-import { ShopProduct } from "../shared.types"
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import ProductListItemTop from "./ProductListItemTop"
+import React from "react";
+import { ShopProduct } from "../shared.types";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import ProductListItemTop from "./ProductListItemTop";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/store";
 
-type AddProduct = (product: ShopProduct) => void;
+// type AddProduct = (product: ShopProduct) => void;
 
 interface Props {
-  product: ShopProduct,
-  onAddProduct: AddProduct
+  product: ShopProduct;
+  onSetTopMsg: (msg: string) => void;
 }
 
-function ProductListItem({ product, onAddProduct }: Props) {
+function ProductListItem({ product, onSetTopMsg }: Props) {
+  const dispatch = useDispatch();
+
+  const addProduct = (product: ShopProduct) => {
+    dispatch(addToCart(product));
+    onSetTopMsg("Product added sucessfully");
+  };
 
   return (
     <>
-      <Grid container item xs={12} md={4}  >
+      <Grid container item xs={12} md={4}>
         <Paper
           sx={{
             p: 1,
             m: 1,
-            bgcolor: 'background.paper',
+            bgcolor: "background.paper",
             borderRadius: 1,
-            height: "100%"
+            height: "100%",
           }}
         >
           <ProductListItemTop product={product} />
@@ -32,7 +40,10 @@ function ProductListItem({ product, onAddProduct }: Props) {
               <p className="text-ellip3">{product.description}</p>
             </Grid>
             <Grid item md={4} sx={{ border: 0 }}>
-              <button className="btn btn-primary" onClick={() => onAddProduct(product)} >
+              <button
+                className="btn btn-primary"
+                onClick={() => addProduct(product)}
+              >
                 Add to Cart
               </button>
             </Grid>
@@ -41,8 +52,6 @@ function ProductListItem({ product, onAddProduct }: Props) {
       </Grid>
     </>
   );
-
 }
 
-
-export default ProductListItem
+export default ProductListItem;

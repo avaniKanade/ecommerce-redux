@@ -4,8 +4,8 @@ import { addToCart, setProducts } from "../redux/store";
 import { productsSelector } from "../redux/store";
 import Alert from "react-bootstrap/Alert";
 import ProductListItem from "./ProductListItem";
-import { ShopProduct } from "../shared.types"
-import Grid from '@mui/material/Grid';
+import { ShopProduct } from "../shared.types";
+import Grid from "@mui/material/Grid";
 
 const Products = () => {
   const prodList = useSelector(productsSelector);
@@ -13,12 +13,12 @@ const Products = () => {
 
   const dispatch = useDispatch();
 
-  const addProduct = (product: ShopProduct) => {
-    dispatch(addToCart(product));
-    setTopMsg("Product added sucessfully");
-  };
   const [loading, setLoading] = useState(false);
   let componentMounted = true;
+
+  const handleSetTopMsg = (msg: string) => {
+    setTopMsg(msg);
+  };
 
   useEffect(() => {
     const getProducts = async () => {
@@ -63,16 +63,15 @@ const Products = () => {
         </Alert>
 
         <Grid container rowSpacing={2} spacing={2}>
-
-        {prodList.map((product: ShopProduct, id: number) => {
-          return (
-            <ProductListItem
-              product={product}
-              key={product.id}
-              onAddProduct={addProduct}
-            />
-          );
-        })}
+          {prodList.map((product: ShopProduct, id: number) => {
+            return (
+              <ProductListItem
+                product={product}
+                key={product.id}
+                onSetTopMsg={handleSetTopMsg}
+              />
+            );
+          })}
         </Grid>
       </>
     );
