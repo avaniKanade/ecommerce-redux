@@ -58,6 +58,7 @@ const Products = () => {
           onClose={() => setTopMsg("")}
           show={topMsg !== ""}
           dismissible
+
         >
           {topMsg}
         </Alert>
